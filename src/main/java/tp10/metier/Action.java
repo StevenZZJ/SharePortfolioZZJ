@@ -10,6 +10,9 @@ package tp10.metier;
  */
 public abstract class Action {
 
+    /**
+     * 
+     */
     private String nom;
 
     /**
@@ -24,7 +27,12 @@ public abstract class Action {
     public Action(String nom) {
         this.nom = nom;
     }
-
+    
+    /**
+     * 
+     * @param j
+     * @return 
+     */
     public abstract float valeur(Jour j);
 
     @Override
