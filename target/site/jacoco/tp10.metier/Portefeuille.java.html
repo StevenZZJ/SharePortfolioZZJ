@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Portefeuille.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.mycompany:UE_test</a> &gt; <a href="index.source.html" class="el_package">tp10.metier</a> &gt; <span class="el_source">Portefeuille.java</span></div><h1>Portefeuille.java</h1><pre class="source lang-java linenums">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package tp10.metier;
+
+import java.util.HashMap;
+
+/**
+ *
+ * @author laurent
+ */
+public class Portefeuille {
+    
+    private HashMap&lt;Action, LignePortefeuille&gt; lignes;
+    
+<span class="nc" id="L17">    public Portefeuille() {</span>
+<span class="nc" id="L18">        this.lignes = new HashMap&lt;Action, LignePortefeuille&gt;();</span>
+<span class="nc" id="L19">    }</span>
+    
+    public void acheter(Action action, int qte) {        
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        if(this.lignes.get(action) == null)</span>
+<span class="nc" id="L23">            this.lignes.put(action, new LignePortefeuille(qte));</span>
+        else
+<span class="nc" id="L25">           this.lignes.get(action).augmenter(qte); </span>
+<span class="nc" id="L26">    }</span>
+    
+    
+    public void vendre(Action action, int qte) {        
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        if(this.lignes.get(action) != null) { // si la ligne existe </span>
+<span class="nc" id="L31">           this.lignes.get(action).diminuer(qte);  // la qte est modifiée</span>
+           
+<span class="nc bnc" id="L33" title="All 2 branches missed.">            if(this.lignes.get(action).getQte() == 0) // reste-il encore</span>
+<span class="nc" id="L34">                this.lignes.remove(action);  // des actions dans la ligne</span>
+        }
+<span class="nc" id="L36">    }</span>
+    /* A améliorer car on suppose que chaque action est valorisable le jour j  
+     *     calcul à bloquer si une action n'est pas quotée par exemple.
+     */
+    public float valeur(Jour j) {
+        float valeurTotale;
+        
+<span class="nc" id="L43">        valeurTotale = 0;</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        for(Action act : this.lignes.keySet()) {</span>
+<span class="nc" id="L45">            valeurTotale = valeurTotale + </span>
+<span class="nc" id="L46">                    (this.lignes.get(act).getQte() * act.valeur(j));</span>
+<span class="nc" id="L47">        }        </span>
+<span class="nc" id="L48">        return valeurTotale;</span>
+    }
+    
+    
+    @Override
+    public String toString() {        
+<span class="nc" id="L54">        return this.lignes.toString();</span>
+    }
+    
+    private class LignePortefeuille {
+        private int qte;
+
+        public int getQte() {
+<span class="nc" id="L61">            return qte;</span>
+        }
+        
+        public void augmenter(int qteAAjouter) {
+<span class="nc bnc" id="L65" title="All 2 branches missed.">            if(qteAAjouter &gt; 0)</span>
+<span class="nc" id="L66">                this.qte = this.qte + qteAAjouter;</span>
+<span class="nc" id="L67">        }</span>
+        
+        public void diminuer(int qteASoustraire) {
+<span class="nc bnc" id="L70" title="All 4 branches missed.">            if(qteASoustraire &lt;= this.qte &amp;&amp; qteASoustraire &gt; 0) {</span>
+<span class="nc" id="L71">                qte = qte - qteASoustraire;</span>
+            }
+<span class="nc" id="L73">        }</span>
+
+<span class="nc" id="L75">        public LignePortefeuille(int qte) {</span>
+<span class="nc" id="L76">            this.qte = qte;</span>
+<span class="nc" id="L77">        }   </span>
+        
+        @Override
+        public String toString() {
+<span class="nc" id="L81">            return Integer.toString(qte);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ActionSimple.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.mycompany:UE_test</a> &gt; <a href="index.source.html" class="el_package">tp10.metier</a> &gt; <span class="el_source">ActionSimple.java</span></div><h1>ActionSimple.java</h1><pre class="source lang-java linenums">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package tp10.metier;
+
+import java.util.HashMap;
+
+/**
+ *
+ * les actions simples sont des actions !
+ *   heritage --&gt; donc (i) concretiser la methode abstraire 'valeur'
+ *                  et (ii) def d'un constructeur cohérent avec le constructeur 
+ *                                   parent
+ */
+public class ActionSimple extends Action {
+    
+    // Table de hachage contenant les cours indexés par des jours
+    private HashMap&lt;Jour, Cours&gt; tblCours;
+    
+    // Constructeur cohérent avec le constructeur parent
+    public ActionSimple(String nom) {
+<span class="nc" id="L23">        super(nom); // c'est d'abord 1 action !</span>
+<span class="nc" id="L24">        this.tblCours = new HashMap&lt;Jour, Cours&gt;();</span>
+<span class="nc" id="L25">    }</span>
+    
+    public void enrgCours(Jour j, float px) {
+        /* création d'un objet Cours associé au prix
+         *    puis ajout dans la table en indexant par le jour
+         */        
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        if(this.tblCours.containsKey(j) == true)</span>
+<span class="nc" id="L32">            this.tblCours.remove(j);</span>
+        
+<span class="nc" id="L34">        this.tblCours.put(j, new Cours(px));</span>
+            
+        
+<span class="nc" id="L37">    }</span>
+    
+    @Override
+    public float valeur(Jour j) {
+        // A FAIRE !
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if(this.tblCours.get(j) != null)</span>
+<span class="nc" id="L43">            return this.tblCours.get(j).getValeur();</span>
+        else
+<span class="nc" id="L45">            return 0; // cours nul si pas de pas de cours</span>
+    }
+   /* classee privée !! 
+    *   la classe n'est accessible que depuis la classe englobante
+    */
+    
+    private class Cours {
+
+        private float valeur;
+
+        /**
+         * Get the value of valeur
+         *
+         * @return the value of valeur
+         */
+        public float getValeur() {
+<span class="nc" id="L61">            return valeur;</span>
+        }
+
+<span class="nc" id="L64">        public Cours(float valeur) {</span>
+<span class="nc" id="L65">            this.valeur = valeur;</span>
+<span class="nc" id="L66">        }        </span>
+    }
+    
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
